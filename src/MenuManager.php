@@ -3,8 +3,9 @@
 namespace MrVaco\MenuManager;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Nova;
+use Laravel\Nova\Menu\MenuSection;
 use Laravel\Nova\Tool;
+use MrVaco\MenuManager\Resources\MenuNovaResource;
 
 class MenuManager extends Tool
 {
@@ -13,11 +14,7 @@ class MenuManager extends Tool
      *
      * @return void
      */
-    public function boot(): void
-    {
-        Nova::script('menu-manager', __DIR__ . '/../dist/js/tool.js');
-        Nova::style('menu-manager', __DIR__ . '/../dist/css/tool.css');
-    }
+    public function boot(): void {}
     
     /**
      * Build the menu that renders the navigation links for the tool.
@@ -26,5 +23,10 @@ class MenuManager extends Tool
      *
      * @return mixed
      */
-    public function menu(Request $request) {}
+    public function menu(Request $request): mixed
+    {
+        return MenuSection::make(MenuNovaResource::label())
+            ->path('/resources/' . MenuNovaResource::uriKey())
+            ->icon('menu-alt-1');
+    }
 }

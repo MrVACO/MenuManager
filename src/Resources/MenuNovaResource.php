@@ -19,6 +19,8 @@ class MenuNovaResource extends Resource
         return 'menu';
     }
     
+    public static $displayInNavigation = false;
+    
     public static string $model = Menu::class;
     
     public static $title = 'title';

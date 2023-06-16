@@ -3,6 +3,7 @@
 namespace MrVaco\MenuManager;
 
 use Illuminate\Support\ServiceProvider;
+use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
 use MrVaco\MenuManager\Resources\MenuNovaResource;
 
@@ -15,7 +16,10 @@ class MenuServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Nova::tools([new MenuManager]);
+        Nova::serving(function(ServingNova $event)
+        {
+            Nova::tools([new MenuManager]);
+        });
     }
     
     /**
