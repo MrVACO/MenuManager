@@ -1,0 +1,30 @@
+{
+    "name": "mr-vaco/menu-manager",
+    "description": "A Laravel Nova tool.",
+    "keywords": [
+        "laravel",
+        "nova"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.0",
+        "mr-vaco/some-helper-code": "^0.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "MrVaco\\MenuManager\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MrVaco\\MenuManager\\MenuServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
