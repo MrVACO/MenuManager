@@ -9,9 +9,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use MrVaco\SomeHelperCode\Enums\LinkTarget;
 use MrVaco\SomeHelperCode\Enums\Status;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
 
-class Menu extends Model
+class Menu extends Model implements Sortable
 {
+    use SortableTrait;
+    
     protected $table = 'mrvaco_menus';
     
     protected $fillable = [
@@ -21,11 +25,18 @@ class Menu extends Model
         'slug',
         'link_target',
         'status',
+        'sort_order',
     ];
     
     protected $casts = [
         'link_target' => LinkTarget::class,
         'status'      => Status::class,
+    ];
+    
+    public array $sortable = [
+        'order_column_name'  => 'sort_order',
+        'sort_when_creating' => true,
+        'sort_on_has_many'   => true,
     ];
     
     public function parent(): BelongsTo
@@ -36,6 +47,7 @@ class Menu extends Model
     public function children(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id')
-            ->with('children');
+            ->with('children')
+            ->orderBy('sort_order');
     }
 }

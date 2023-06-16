@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace MrVaco\MenuManager\Resources;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
@@ -18,9 +19,12 @@ use Laravel\Nova\Resource;
 use MrVaco\MenuManager\Models\Menu;
 use MrVaco\SomeHelperCode\Enums\LinkTarget;
 use MrVaco\SomeHelperCode\Enums\Status;
+use Outl1ne\NovaSortable\Traits\HasSortableRows;
 
 class MenuNovaResource extends Resource
 {
+    use HasSortableRows;
+    
     public static function uriKey(): string
     {
         return 'menu';
@@ -45,6 +49,8 @@ class MenuNovaResource extends Resource
     public static $search = [
         'title'
     ];
+    
+    const DEFAULT_INDEX_ORDER = 'sort_order';
     
     public function fields(Request $request): array
     {
@@ -87,16 +93,16 @@ class MenuNovaResource extends Resource
             
             Badge::make(__('Status'), 'status')
                 ->addTypes([
-                    0 => 'text-yellow-500',
-                    1 => 'text-blue-500',
-                    2 => 'text-gray-400',
-                    3 => 'text-red-600',
-                    4 => 'text-green-600',
+                    0 => 'bg-yellow-500 text-white h-7 justify-center',
+                    1 => 'bg-blue-500 text-white h-7 justify-center',
+                    2 => 'bg-gray-400 text-white h-7 justify-center',
+                    3 => 'bg-red-600 text-white h-7 justify-center',
+                    4 => 'bg-green-600 text-white h-7 justify-center',
                 ])
                 ->icons([
                     0 => 'shield-check',
                     1 => '',
-                    2 => '',
+                    2 => 'pencil',
                     3 => '',
                     4 => '',
                 ])
@@ -109,5 +115,15 @@ class MenuNovaResource extends Resource
                 ->default(Status::Active)
                 ->onlyOnForms(),
         ];
+    }
+    
+    public static function indexQuery($request, $query)
+    {
+        $query->when(empty($request->get('orderBy')), function(Builder $q)
+        {
+            $q->getQuery()->orders = [];
+            
+            return $q->orderBy(static::DEFAULT_INDEX_ORDER);
+        });
     }
 }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('link_target')->default(LinkTarget::Self->value);
             $table->integer('status')->default(Status::New->value);
+            $table->integer('sort_order')->nullable();
             $table->timestamps();
         });
     }
