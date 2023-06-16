@@ -17,6 +17,11 @@ class MenuServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->app->booted(function()
+        {
+            $this->routes();
+        });
+        
         Nova::serving(function(ServingNova $event)
         {
             Nova::tools([new MenuManager]);
@@ -35,5 +40,23 @@ class MenuServiceProvider extends ServiceProvider
         Nova::resources([
             MenuNovaResource::class
         ]);
+    }
+    
+    /**
+     * Register the tool's routes.
+     *
+     * @return void
+     */
+    protected function routes(): void
+    {
+        if ($this->app->routesAreCached())
+        {
+            return;
+        }
+        
+        app('router')
+            ->middleware('api')
+            ->prefix('api/menu')
+            ->group(__DIR__ . '/../routes/api.php');
     }
 }
