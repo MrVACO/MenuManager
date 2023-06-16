@@ -26,6 +26,16 @@ class MenuNovaResource extends Resource
         return 'menu';
     }
     
+    public static function label(): string
+    {
+        return __('Menu');
+    }
+    
+    public static function singularLabel(): string
+    {
+        return __('menu item');
+    }
+    
     public static $displayInNavigation = false;
     
     public static string $model = Menu::class;
