@@ -53,8 +53,7 @@ class MenuNovaResource extends Resource
             
             BelongsTo::make(__('Parent item'), 'parent', self::class)
                 ->sortable()
-                ->nullable()
-                ->rules('required'),
+                ->nullable(),
             
             HasMany::make(__('Child elements'), 'children', self::class)->sortable(),
             
@@ -96,7 +95,7 @@ class MenuNovaResource extends Resource
                 ])
                 ->icons([
                     0 => 'shield-check',
-                    1 => 'plus',
+                    1 => '',
                     2 => '',
                     3 => '',
                     4 => '',
