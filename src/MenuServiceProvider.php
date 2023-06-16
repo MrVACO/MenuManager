@@ -2,6 +2,7 @@
 
 namespace MrVaco\MenuManager;
 
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
@@ -20,6 +21,8 @@ class MenuServiceProvider extends ServiceProvider
         {
             Nova::tools([new MenuManager]);
         });
+        
+        Lang::addJsonPath(__DIR__ . '/Lang');
     }
     
     /**
