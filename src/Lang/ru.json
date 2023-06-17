@@ -7,5 +7,6 @@
     "Description": "Описание",
     "Slug": "URL",
     "Link target": "Цель ссылки",
-    "Status": "Статус"
+    "Status": "Статус",
+    "By Status": "По статусу"
 }
