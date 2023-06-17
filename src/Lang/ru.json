@@ -8,5 +8,6 @@
     "Slug": "URL",
     "Link target": "Цель ссылки",
     "Status": "Статус",
-    "By Status": "По статусу"
+    "By Status": "По статусу",
+    "By Link target": "По цели ссылки"
 }

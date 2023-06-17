@@ -7,13 +7,13 @@ namespace MrVaco\MenuManager\Filters;
 use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Filters\BooleanFilter;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use MrVaco\SomeHelperCode\Enums\Status;
+use MrVaco\SomeHelperCode\Enums\LinkTarget;
 
-class StatusFilter extends BooleanFilter
+class FilterByLinkTarget extends BooleanFilter
 {
     public function name(): string
     {
-        return __('By Status');
+        return __('By Link target');
     }
     
     public function default(): array
@@ -26,11 +26,11 @@ class StatusFilter extends BooleanFilter
     
     public function apply(NovaRequest $request, $query, $value): Builder
     {
-        return $query->whereIn('status', array_keys($value, true));
+        return $query->whereIn('link_target', array_keys($value, true));
     }
     
     public function options(NovaRequest $request): array
     {
-        return array_combine(array_map(fn ($item): string => __($item), Status::names()), Status::values());
+        return array_combine(array_map(fn ($item): string => __($item), LinkTarget::names()), LinkTarget::values());
     }
 }

@@ -17,7 +17,8 @@ use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
-use MrVaco\MenuManager\Filters\StatusFilter;
+use MrVaco\MenuManager\Filters\FilterByLinkTarget;
+use MrVaco\MenuManager\Filters\FilterByStatus;
 use MrVaco\MenuManager\Models\Menu;
 use MrVaco\SomeHelperCode\Enums\LinkTarget;
 use MrVaco\SomeHelperCode\Enums\Status;
@@ -132,7 +133,8 @@ class MenuNovaResource extends Resource
     public function filters(NovaRequest $request): array
     {
         return [
-            new StatusFilter
+            new FilterByStatus,
+            new FilterByLinkTarget
         ];
     }
 }
