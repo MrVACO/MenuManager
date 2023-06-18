@@ -27,7 +27,7 @@ class MenuServiceProvider extends ServiceProvider
             Nova::tools([new MenuManager]);
         });
         
-        Lang::addJsonPath(__DIR__ . '/Lang');
+        Lang::addJsonPath(__DIR__ . '/../lang');
     }
     
     /**
