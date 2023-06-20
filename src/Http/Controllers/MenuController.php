@@ -9,8 +9,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller;
 use MrVaco\MenuManager\Models\Menu;
 use MrVaco\MenuManager\Resources\MenuResource;
+use MrVaco\NovaStatusesManager\Classes\StatusClass;
 use MrVaco\SomeHelperCode\Classes\AdditionalData;
-use MrVaco\SomeHelperCode\Enums\Status;
 
 class MenuController extends Controller
 {
@@ -20,7 +20,7 @@ class MenuController extends Controller
     {
         $data = Menu::query()
             ->where('slug', $slug)
-            ->where('status', Status::Active)
+            ->where('status', StatusClass::ACTIVE()->id)
             ->first();
         
         return empty($data)

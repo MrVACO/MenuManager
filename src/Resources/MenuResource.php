@@ -7,7 +7,7 @@ namespace MrVaco\MenuManager\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
-use MrVaco\SomeHelperCode\Enums\Status;
+use MrVaco\NovaStatusesManager\Classes\StatusClass;
 
 /** @mixin \MrVaco\MenuManager\Models\Menu */
 class MenuResource extends JsonResource
@@ -21,7 +21,7 @@ class MenuResource extends JsonResource
             'description' => $this->description,
             'slug'        => $this->slug,
             'link_target' => $this->link_target,
-            //'status'      => $this->status->trans(),
+            //'status'      => $this->status,
             //'sort_order'  => $this->sort_order,
             //'created_at'  => $this->created_at,
             //'updated_at'  => $this->updated_at,
@@ -35,7 +35,7 @@ class MenuResource extends JsonResource
         
         $filtered = $collection->filter(function($value, $key)
         {
-            return $value['status'] == Status::Active;
+            return $value['status'] == StatusClass::ACTIVE()->id;
         });
         
         return empty($filtered->all()) ? null : MenuResource::collection($filtered->all());

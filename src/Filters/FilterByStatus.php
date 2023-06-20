@@ -7,7 +7,7 @@ namespace MrVaco\MenuManager\Filters;
 use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Filters\BooleanFilter;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use MrVaco\SomeHelperCode\Enums\Status;
+use MrVaco\NovaStatusesManager\Classes\StatusClass;
 
 class FilterByStatus extends BooleanFilter
 {
@@ -31,6 +31,6 @@ class FilterByStatus extends BooleanFilter
     
     public function options(NovaRequest $request): array
     {
-        return array_combine(array_map(fn ($item): string => __($item), Status::names()), Status::values());
+        return StatusClass::LIST('full', true);
     }
 }

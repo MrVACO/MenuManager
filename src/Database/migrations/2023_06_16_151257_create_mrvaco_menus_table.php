@@ -5,8 +5,8 @@ declare(strict_types = 1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use MrVaco\NovaStatusesManager\Classes\StatusClass;
 use MrVaco\SomeHelperCode\Enums\LinkTarget;
-use MrVaco\SomeHelperCode\Enums\Status;
 
 return new class extends Migration
 {
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('slug');
             $table->string('link_target')->default(LinkTarget::Self->value);
-            $table->integer('status')->default(Status::New->value);
+            $table->integer('status')->default(StatusClass::DEFAULT_ID());
             $table->integer('sort_order')->nullable();
             $table->timestamps();
         });

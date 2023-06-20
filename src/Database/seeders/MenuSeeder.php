@@ -6,34 +6,34 @@ namespace MrVaco\MenuManager\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use MrVaco\MenuManager\Models\Menu;
-use MrVaco\SomeHelperCode\Enums\Status;
+use MrVaco\NovaStatusesManager\Classes\StatusClass;
 
 class MenuSeeder extends Seeder
 {
     public function run(): void
     {
         $topMenu = Menu::query()->create([
-            'title'  => 'Главное меню',
+            'title'  => 'Main menu',
             'slug'   => 'top-menu',
-            'status' => Status::Active,
+            'status' => StatusClass::ACTIVE()->id,
         ]);
         
         $mobileMenu = Menu::query()->create([
-            'title'  => 'Мобильное меню',
+            'title'  => 'Mobile menu',
             'slug'   => 'mobile-menu',
-            'status' => Status::Disabled,
+            'status' => StatusClass::DISABLED()->id,
         ]);
         
         $footerMenu = Menu::query()->create([
-            'title'  => 'Нижнее меню',
+            'title'  => 'Bottom menu',
             'slug'   => 'footer-menu',
-            'status' => Status::Disabled,
+            'status' => StatusClass::DISABLED()->id,
         ]);
         
         $topMenu->children()->create([
-            'title'  => 'Главная страница',
+            'title'  => 'Main page',
             'slug'   => '/',
-            'status' => Status::Active,
+            'status' => StatusClass::ACTIVE()->id,
         ]);
     }
 }

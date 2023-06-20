@@ -6,7 +6,6 @@ namespace MrVaco\MenuManager\Resources;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
@@ -20,8 +19,9 @@ use Laravel\Nova\Resource;
 use MrVaco\MenuManager\Filters\FilterByLinkTarget;
 use MrVaco\MenuManager\Filters\FilterByStatus;
 use MrVaco\MenuManager\Models\Menu;
+use MrVaco\NovaStatusesManager\Classes\StatusClass;
+use MrVaco\NovaStatusesManager\Fields\Status;
 use MrVaco\SomeHelperCode\Enums\LinkTarget;
-use MrVaco\SomeHelperCode\Enums\Status;
 use Outl1ne\NovaSortable\Traits\HasSortableRows;
 
 class MenuNovaResource extends Resource
@@ -94,28 +94,12 @@ class MenuNovaResource extends Resource
                 ->default(LinkTarget::Self)
                 ->onlyOnForms(),
             
-            Badge::make(__('Status'), 'status')
-                ->addTypes([
-                    0 => 'bg-yellow-500 text-white h-7 justify-center',
-                    1 => 'bg-blue-500 text-white h-7 justify-center',
-                    2 => 'bg-gray-400 text-white h-7 justify-center',
-                    3 => 'bg-red-600 text-white h-7 justify-center',
-                    4 => 'bg-green-600 text-white h-7 justify-center',
-                ])
-                ->icons([
-                    0 => 'shield-check',
-                    1 => '',
-                    2 => 'pencil',
-                    3 => '',
-                    4 => '',
-                ])
-                ->labels(Status::list())
-                ->sortable(),
+            Status::make(__('Status'), 'status')->sortable(),
             
             Select::make(__('Status'), 'status')
                 ->rules('required')
-                ->options(Status::list())
-                ->default(Status::Active)
+                ->options(StatusClass::LIST('full'))
+                ->default(StatusClass::ACTIVE()->id)
                 ->onlyOnForms(),
         ];
     }

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use MrVaco\SomeHelperCode\Enums\LinkTarget;
-use MrVaco\SomeHelperCode\Enums\Status;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 
@@ -30,7 +29,6 @@ class Menu extends Model implements Sortable
     
     protected $casts = [
         'link_target' => LinkTarget::class,
-        'status'      => Status::class,
     ];
     
     public array $sortable = [
