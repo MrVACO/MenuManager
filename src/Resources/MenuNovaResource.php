@@ -94,13 +94,11 @@ class MenuNovaResource extends Resource
                 ->default(LinkTarget::Self)
                 ->onlyOnForms(),
             
-            Status::make(__('Status'), 'status')->sortable(),
-            
-            Select::make(__('Status'), 'status')
+            Status::make(__('Status'), 'status')
                 ->rules('required')
                 ->options(StatusClass::LIST('full'))
                 ->default(StatusClass::ACTIVE()->id)
-                ->onlyOnForms(),
+                ->sortable(),
         ];
     }
     
