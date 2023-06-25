@@ -62,7 +62,8 @@ class MenuNovaResource extends Resource
             
             BelongsTo::make(__('Parent item'), 'parent', self::class)
                 ->sortable()
-                ->nullable(),
+                ->nullable()
+                ->rules(['required']),
             
             HasMany::make(__('Child elements'), 'children', self::class)->sortable(),
             
