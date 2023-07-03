@@ -8,8 +8,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
-        "mr-vaco/nova-statuses-manager": "@dev",
-        "mr-vaco/some-helper-code": "@dev",
+        "mr-vaco/nova-statuses-manager": "^0",
+        "mr-vaco/some-helper-code": "^1.0",
         "outl1ne/nova-sortable": "^3.4",
         "spatie/eloquent-sortable": "^4.0"
     },
