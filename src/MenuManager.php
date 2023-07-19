@@ -5,7 +5,7 @@ namespace MrVaco\MenuManager;
 use Illuminate\Http\Request;
 use Laravel\Nova\Menu\MenuSection;
 use Laravel\Nova\Tool;
-use MrVaco\MenuManager\Resources\MenuNovaResource;
+use MrVaco\MenuManager\Nova\NovaMenuResource;
 
 class MenuManager extends Tool
 {
@@ -25,8 +25,8 @@ class MenuManager extends Tool
      */
     public function menu(Request $request): mixed
     {
-        return MenuSection::make(MenuNovaResource::label())
-            ->path('/resources/' . MenuNovaResource::uriKey())
+        return MenuSection::make(NovaMenuResource::label())
+            ->path('/resources/' . NovaMenuResource::uriKey())
             ->icon('menu-alt-1');
     }
 }

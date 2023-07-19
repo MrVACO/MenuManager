@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace MrVaco\MenuManager\Resources;
+namespace MrVaco\MenuManager\Nova;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ use MrVaco\NovaStatusesManager\Fields\Status;
 use MrVaco\SomeHelperCode\Enums\LinkTarget;
 use Outl1ne\NovaSortable\Traits\HasSortableRows;
 
-class MenuNovaResource extends Resource
+class NovaMenuResource extends Resource
 {
     use HasSortableRows;
     

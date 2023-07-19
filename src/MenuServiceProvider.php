@@ -6,15 +6,10 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
-use MrVaco\MenuManager\Resources\MenuNovaResource;
+use MrVaco\MenuManager\Nova\NovaMenuResource;
 
 class MenuServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
     public function boot(): void
     {
         $this->app->booted(function()
@@ -30,23 +25,13 @@ class MenuServiceProvider extends ServiceProvider
         Lang::addJsonPath(__DIR__ . '/../lang');
     }
     
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
     public function register(): void
     {
         Nova::resources([
-            MenuNovaResource::class
+            NovaMenuResource::class
         ]);
     }
     
-    /**
-     * Register the tool's routes.
-     *
-     * @return void
-     */
     protected function routes(): void
     {
         if ($this->app->routesAreCached())
