@@ -8,6 +8,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "mr-vaco/nova-panels": "^1.0.5",
         "mr-vaco/nova-statuses-manager": "^1.0",
         "mr-vaco/some-helper-code": "^0.1",
         "outl1ne/nova-sortable": "^3.4",

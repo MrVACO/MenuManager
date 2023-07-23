@@ -15,7 +15,6 @@ use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Panel;
 use Laravel\Nova\Resource;
 use MrVaco\MenuManager\Filters\FilterByLinkTarget;
 use MrVaco\MenuManager\Filters\FilterByStatus;
@@ -78,33 +77,29 @@ class NovaMenuResource extends Resource
                 return $this->link_target->trans();
             }),
             
-            Panel::make('secondary', $this->secondaryPanel()),
-            
-            HasMany::make(__('Child elements'), 'children', self::class)->sortable(),
-        ];
-    }
-    
-    protected function secondaryPanel(): array
-    {
-        return [
             BelongsTo::make(__('Parent item'), 'parent', self::class)
                 ->sortable()
                 ->nullable()
-                ->col(),
+                ->col()
+                ->forSecondary(),
             
             Select::make(__('Link target'), 'link_target')
                 ->rules('required')
                 ->options(LinkTarget::list())
                 ->default(LinkTarget::Self)
                 ->onlyOnForms()
-                ->col(),
+                ->col()
+                ->forSecondary(),
             
             Status::make(__('Status'), 'status')
                 ->rules('required')
                 ->options(StatusClass::LIST('full'))
                 ->default(StatusClass::ACTIVE()->id)
                 ->sortable()
-                ->col(),
+                ->col()
+                ->forSecondary(),
+            
+            HasMany::make(__('Child elements'), 'children', self::class)->sortable(),
         ];
     }
     
